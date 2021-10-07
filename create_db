@@ -1,0 +1,60 @@
+CREATE DATABASE IF NOT EXISTS boarding_pass_db;
+
+USE boarding_pass_db;
+
+DROP TABLE IF EXISTS customer;
+CREATE TABLE customer (
+    customer_id int NOT NULL AUTO_INCREMENT,
+    first_name varchar(45) DEFAULT NULL,
+    last_name varchar(45) DEFAULT NULL,
+    email varchar(45) DEFAULT NULL,
+    phone char(10) DEFAULT NULL,
+    gender char(1) DEFAULT NULL,
+    age int DEFAULT NULL,
+    PRIMARY KEY (customer_id)
+) ENGINE=InnoDB  AUTO_INCREMENT=1   DEFAULT CHARSET=latin1; 
+
+DROP TABLE IF EXISTS itinerary;
+CREATE TABLE itinerary (
+  itinerary_id int NOT NULL AUTO_INCREMENT,
+  travel_date DATE NOT NULL, 
+  origin varchar(100) DEFAULT NULL,
+  destination varchar(100) DEFAULT NULL,
+  departure_time TIME DEFAULT NULL,
+  eta TIME DEFAULT NULL,
+  PRIMARY KEY (itinerary_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS prices;
+CREATE TABLE prices (
+    price_id int NOT NULL AUTO_INCREMENT,
+    price int DEFAULT NULL,
+    PRIMARY KEY (price_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS ticket;
+CREATE TABLE ticket (
+    ticket_id int NOT NULL AUTO_INCREMENT,
+    customer_id int NOT NULL,
+    itinerary_id int NOT NULL,
+    price_id int NOT NULL,
+    travel_dat DATE NOT NULL, 
+    origin varchar(100) DEFAULT NULL,
+    destination varchar(100) DEFAULT NULL,
+    departure_time TIME DEFAULT NULL,
+    eta TIME DEFAULT NULL,
+    first_name varchar(45) DEFAULT NULL,
+    last_name varchar(45) DEFAULT NULL,
+    email varchar(45) DEFAULT NULL,
+    phone char(10) DEFAULT NULL,
+    gender char(1) DEFAULT NULL,
+    age int DEFAULT NULL,
+    purchase_date DATETIME DEFAULT NULL,
+    quantity int,
+    price int DEFAULT NULL,
+    final_price DECIMAL(10,2),
+    PRIMARY KEY (ticket_id),
+    FOREIGN KEY (customer_id) REFERENCES customer (customer_id),
+    FOREIGN KEY (itinerary_id) REFERENCES itinerary (itinerary_id),
+    FOREIGN KEY (price_id) REFERENCES prices (price_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
