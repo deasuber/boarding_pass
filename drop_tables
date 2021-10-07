@@ -1,0 +1,4 @@
+DROP TABLE ticket;
+DROP TABLE customer;
+DROP TABLE itinerary;
+DROP TABLE prices;
